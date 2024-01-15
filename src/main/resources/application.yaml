@@ -1,0 +1,38 @@
+server:
+  port: 8091
+spring:
+  redis:
+    redisson:
+      file: classpath:redisson.yaml
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/testdb?createDatabaseIfNotExist=true
+    username: postgres
+    password: test1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+      generate-ddl: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        cache:
+          redisson:
+            usercache:
+              expiration:
+                time_to_live: 10000
+            User:
+              expiration:
+                time_to_live: 10000
+          use_second_level_cache: true
+          use_query_cache: true
+          region:
+            factory_class: org.redisson.hibernate.RedissonRegionFactory
+          config: redisson.yaml
+
+logging:
+  level:
+    root: DEBUG
+    org:
+      hibernate:
+        cache: DEBUG
