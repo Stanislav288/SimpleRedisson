@@ -15,6 +15,6 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2.1.1
+      - name: Super-linter
+        uses: super-linter/super-linter@v6.3.0  # x-release-please-version
       - run: echo "🍏 This job's status is ${{ job.status }}."
